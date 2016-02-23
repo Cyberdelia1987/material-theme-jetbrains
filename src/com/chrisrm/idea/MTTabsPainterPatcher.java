@@ -80,9 +80,13 @@ public class MTTabsPainterPatcher implements ApplicationComponent {
                 if ("paintSelectionAndBorder".equals(method.getName())) {
                     final Graphics2D g2d = (Graphics2D) objects[0];
                     final Rectangle rect = (Rectangle) objects[1];
+                    final Boolean horizontalTabs = (Boolean) objects[5];
 
                     g2d.setColor(ColorUtil.fromHex("#" + properties.getProperty("material.tab.border")));
                     g2d.fillRect(rect.x, rect.y + rect.height - 2, rect.width, 2);
+                    if (!horizontalTabs) {
+                        g2d.fillRect(rect.x, rect.y, rect.width, 2);
+                    }
                 }
 
                 return result;
